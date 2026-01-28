@@ -1,45 +1,41 @@
-
 import java.util.Arrays;
 
-public class QuickFind {
+public class QuickUnion {
+    int[] id;
 
-    private int[] arr;
-
-    public QuickFind(int n) {
-        arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            arr[i] = i;
+    public QuickUnion(int n) {
+        id = new int[n];
+        for (int i = 0; i < id.length; i++) {
+            id[i] = i;
         }
     }
 
-    public void union(int p, int q) {
+    public void union(int q, int p) {
+        id[root(q)] = root(p);
+    }
 
-        int combination = arr[q];
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == combination) {
-                arr[i] = arr[p];
+    public int root(int p) {
+        int i = p;
+        while (true) {
+            if (id[i] == i) {
+                return i;
+            } else {
+                i = id[i];
             }
         }
-        return;
-    }
 
-    public int find(int p) {
-        return arr[p];
     }
 
     public boolean connected(int p, int q) {
-        return arr[p] == arr[q];
+        return root(p) == root(q);
     }
 
     public String toString() {
-        String s = "";
-
-        return s;
+        return "";
     }
 
     public static void main(String[] args) {
-        QuickFind q = new QuickFind(5);
+        QuickUnion q = new QuickUnion(5);
         boolean[] expected = new boolean[] { true };
         boolean[] actual = new boolean[expected.length];
 
@@ -53,4 +49,5 @@ public class QuickFind {
         System.out.println("Execution Time: " + ((double) System.nanoTime() - startTime) / 1e9);
         System.out.println(Arrays.equals(expected, actual));
     }
+
 }
