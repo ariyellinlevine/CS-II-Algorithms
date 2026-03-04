@@ -3,7 +3,8 @@ import java.util.Iterator;
 public class Deque<Type> implements Iterable<Type> {
     private class Node {
         Type item;
-        Node prev, next;
+        Node prev;
+        Node next;
 
         public Node(Type item) {
             this.item = item;
